@@ -1,170 +1,646 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    Fore more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-  -->
-    <base href="/" />
-
-    <meta charset="UTF-8" />
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
-    <meta name="description" content="Created Responsive Portfolio with Flutter." />
-
-    <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="portfolio" />
-    <link rel="apple-touch-icon" href="icons/avatar.jpg" />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="icons/avatar.jpg" />
-
-    <title>portfolio</title>
-    <link rel="manifest" href="manifest.json" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akter Hossain | Senior Flutter Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:wght@300;600;900&display=swap" rel="stylesheet">
+    
     <style>
-      .loading {
-        position: fixed;
-        z-index: 999;
-        height: 2em;
-        width: 2em;
-        overflow: visible;
-        margin: auto;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-      }
+        :root {
+            --bg: #fafaf8;
+            --fg: #0a0a0a;
+            --accent: #2563eb;
+            --muted: #737373;
+            --border: #e5e5e5;
+            --mono: 'DM Mono', monospace;
+            --display: 'Fraunces', serif;
+        }
 
-      /* Transparent Overlay */
-      .loading:before {
-        content: "";
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #071d34;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      /* :not(:required) hides these rules from IE9 and below */
-      .loading:not(:required) {
-        /* hide "loading..." text */
-        font: 0/0 a;
-        color: transparent;
-        text-shadow: none;
-        background-color: transparent;
-        border: 0;
-      }
+        body {
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+            font-size: 14px;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
 
-      .loading:not(:required):after {
-        content: "";
-        display: block;
-        font-size: 10px;
-        width: 1em;
-        height: 1em;
-        margin-top: -0.5em;
-        -webkit-animation: spinner 1500ms infinite linear;
-        -moz-animation: spinner 1500ms infinite linear;
-        -ms-animation: spinner 1500ms infinite linear;
-        -o-animation: spinner 1500ms infinite linear;
-        animation: spinner 1500ms infinite linear;
-        border-radius: 0.5em;
-        -webkit-box-shadow: #1eebb3 1.5em 0 0 0, #1eebb3 1.1em 1.1em 0 0,
-          #1eebb3 0 1.5em 0 0, #1eebb3 -1.1em 1.1em 0 0,
-          rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0,
-          #1eebb3 0 -1.5em 0 0, #1eebb3 1.1em -1.1em 0 0;
-        box-shadow: #1eebb3 1.5em 0 0 0, #1eebb3 1.1em 1.1em 0 0,
-          #1eebb3 0 1.5em 0 0, #1eebb3 -1.1em 1.1em 0 0, #1eebb3 -1.5em 0 0 0,
-          #1eebb3 -1.1em -1.1em 0 0, #1eebb3 0 -1.5em 0 0,
-          #1eebb3 1.1em -1.1em 0 0;
-      }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.2s forwards;
+        }
 
-      /* Animation */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
 
-      @-webkit-keyframes spinner {
-        0% {
-          -webkit-transform: rotate(0deg);
-          -moz-transform: rotate(0deg);
-          -ms-transform: rotate(0deg);
-          -o-transform: rotate(0deg);
-          transform: rotate(0deg);
+        header {
+            margin-bottom: 120px;
+            position: relative;
         }
-        100% {
-          -webkit-transform: rotate(360deg);
-          -moz-transform: rotate(360deg);
-          -ms-transform: rotate(360deg);
-          -o-transform: rotate(360deg);
-          transform: rotate(360deg);
+
+        h1 {
+            font-family: var(--display);
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            animation: slideUp 0.6s ease-out 0.4s backwards;
         }
-      }
-      @-moz-keyframes spinner {
-        0% {
-          -webkit-transform: rotate(0deg);
-          -moz-transform: rotate(0deg);
-          -ms-transform: rotate(0deg);
-          -o-transform: rotate(0deg);
-          transform: rotate(0deg);
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
         }
-        100% {
-          -webkit-transform: rotate(360deg);
-          -moz-transform: rotate(360deg);
-          -ms-transform: rotate(360deg);
-          -o-transform: rotate(360deg);
-          transform: rotate(360deg);
+
+        .role {
+            font-size: 16px;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 40px;
+            animation: slideUp 0.6s ease-out 0.5s backwards;
         }
-      }
-      @-o-keyframes spinner {
-        0% {
-          -webkit-transform: rotate(0deg);
-          -moz-transform: rotate(0deg);
-          -ms-transform: rotate(0deg);
-          -o-transform: rotate(0deg);
-          transform: rotate(0deg);
+
+        .contact-bar {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            animation: slideUp 0.6s ease-out 0.6s backwards;
         }
-        100% {
-          -webkit-transform: rotate(360deg);
-          -moz-transform: rotate(360deg);
-          -ms-transform: rotate(360deg);
-          -o-transform: rotate(360deg);
-          transform: rotate(360deg);
+
+        .contact-link {
+            font-size: 13px;
+            color: var(--fg);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
         }
-      }
-      @keyframes spinner {
-        0% {
-          -webkit-transform: rotate(0deg);
-          -moz-transform: rotate(0deg);
-          -ms-transform: rotate(0deg);
-          -o-transform: rotate(0deg);
-          transform: rotate(0deg);
+
+        .contact-link:hover {
+            color: var(--accent);
         }
-        100% {
-          -webkit-transform: rotate(360deg);
-          -moz-transform: rotate(360deg);
-          -ms-transform: rotate(360deg);
-          -o-transform: rotate(360deg);
-          transform: rotate(360deg);
+
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
-      }
+
+        .contact-link:hover::after {
+            width: 100%;
+        }
+
+        .section {
+            margin-bottom: 100px;
+        }
+
+        .section-title {
+            font-family: var(--display);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            color: var(--muted);
+        }
+
+        .intro {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-bottom: 80px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px 60px;
+        }
+
+        .skill-group h3 {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+            color: var(--muted);
+        }
+
+        .skill-group p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--fg);
+        }
+
+        .project {
+            margin-bottom: 80px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project:hover {
+            transform: translateX(8px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .project-name {
+            font-family: var(--display);
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .company {
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+        }
+
+        .project-description {
+            margin-bottom: 16px;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            background: var(--fg);
+            color: var(--bg);
+            border-radius: 2px;
+            letter-spacing: 0.03em;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 400;
+            transition: gap 0.2s ease;
+        }
+
+        .project-link:hover {
+            gap: 12px;
+        }
+
+        .project-link::after {
+            content: '→';
+            font-size: 16px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 6px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--fg);
+        }
+
+        .timeline-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .timeline-meta {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            letter-spacing: 0.03em;
+        }
+
+        .timeline-description {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        footer {
+            margin-top: 120px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 20px;
+            }
+
+            header {
+                margin-bottom: 80px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .contact-bar {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--muted);
+            background: var(--bg);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .scroll-indicator.visible {
+            opacity: 1;
+        }
+
+        .scroll-indicator:hover {
+            transform: translateY(-4px);
+            color: var(--accent);
+        }
     </style>
-  </head>
-  <body style="background-color: #071d34">
-    <div class="loading"></div>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Akter Hossain</h1>
+            <div class="role">Senior Flutter Engineer</div>
+            <div class="contact-bar">
+                <a href="mailto:akterh.ja@gmail.com" class="contact-link">akterh.ja@gmail.com</a>
+                <a href="tel:+8801844664252" class="contact-link">+880 1844664252</a>
+                <a href="https://linkedin.com/in/akterh" target="_blank" class="contact-link">LinkedIn</a>
+                <a href="https://github.com/akterh" target="_blank" class="contact-link">GitHub</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="intro">
+                Mobile application engineer with 5+ years of experience specializing in Flutter, scalable mobile architectures, and high-performance business applications for B2B and B2C markets.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h3>Languages</h3>
+                    <p>Dart, Kotlin, JavaScript</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Architecture</h3>
+                    <p>Clean Architecture, MVVM, SOLID, OOP</p>
+                </div>
+                <div class="skill-group">
+                    <h3>State Management</h3>
+                    <p>BLoC, Provider, Riverpod</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Databases</h3>
+                    <p>SQLite, Hive, SharedPreference</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Technologies</h3>
+                    <p>WebRTC, Socket.io, Firebase, In-App Purchase, Google Maps</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Specialties</h3>
+                    <p>Performance optimization, payment systems, AI-assisted features</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">DeepGrow</div>
+                    <div class="company">Dinnova AG Ltd.</div>
+                </div>
+                <p class="project-description">
+                    AI-personalized hypnosis app with GPT-5 voice simulation and ElevenLabs integration. Implemented IAP system and OCEAN-model personalization with optimized UX and caching.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">IAP</span>
+                    <span class="tag">AI Integration</span>
+                    <span class="tag">Voice Simulation</span>
+                    <span class="tag">Personalization</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=ch.deepgrow&hl=en&pli=1" target="_blank" class="project-link">View on Play Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">MyKetoBrain</div>
+                    <div class="company">Dinnova AG Ltd.</div>
+                </div>
+                <p class="project-description">
+                    Ketogenic diet planning app with 300+ nutritionist-verified recipes, personalized nutrition management, and mental health support. Features macro tracking, mood monitoring, and auto-renewable subscription system serving a large active user base.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Health & Wellness</span>
+                    <span class="tag">Nutrition Tracking</span>
+                    <span class="tag">IAP</span>
+                    <span class="tag">Recipe Database</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=ch.dinnova.myketobrain&hl=en_US" target="_blank" class="project-link">View on Play Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">LetsPlan</div>
+                    <div class="company">Dinnova AG Ltd.</div>
+                </div>
+                <p class="project-description">
+                    Comprehensive planning platform with payment flow integration, map services, and advanced scheduling engine.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Payment Systems</span>
+                    <span class="tag">Maps</span>
+                    <span class="tag">Scheduling</span>
+                </div>
+                <a href="https://apps.apple.com/us/app/letsplan-schweiz/id6737227387" target="_blank" class="project-link">View on App Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">SkillMatch</div>
+                    <div class="company">Dinnova AG Ltd.</div>
+                </div>
+                <p class="project-description">
+                    Real-time skill exchange platform with Socket.io communication and IAP. Delivered features early with fewer defects through optimized development practices.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Socket.io</span>
+                    <span class="tag">Real-time</span>
+                    <span class="tag">IAP</span>
+                </div>
+                <a href="https://apps.apple.com/us/app/skillmatch-exchange-skills/id6740201567" target="_blank" class="project-link">View on App Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">Shine</div>
+                    <div class="company">Dinnova AG Ltd.</div>
+                </div>
+                <p class="project-description">
+                    Social connection app with authentication, profile swiping functionality, and push notifications system.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Authentication</span>
+                    <span class="tag">Push Notifications</span>
+                    <span class="tag">Social Features</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.dinnova.shine" target="_blank" class="project-link">View on Play Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">ShopySwiss</div>
+                    <div class="company">Dinnova AG Ltd.</div>
+                </div>
+                <p class="project-description">
+                    Innovative retail solution with BLE-based fridge-opening purchase module for seamless shopping experience.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">BLE</span>
+                    <span class="tag">IoT</span>
+                    <span class="tag">Retail</span>
+                </div>
+                <a href="https://apps.apple.com/us/app/shopyswiss/id1626706201" target="_blank" class="project-link">View on App Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">RideAlike</div>
+                    <div class="company">RideAlike Inc.</div>
+                </div>
+                <p class="project-description">
+                    Carsharing platform with car exchange, chat, and booking modules. Implemented activity logs, tracking, and logic optimization.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Chat</span>
+                    <span class="tag">Booking</span>
+                    <span class="tag">Tracking</span>
+                </div>
+                <a href="https://apps.apple.com/us/app/ridealike-your-carsharing-app/id1571154008" target="_blank" class="project-link">View on App Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">Restaurant 360</div>
+                    <div class="company">M360ICT Ltd.</div>
+                </div>
+                <p class="project-description">
+                    Restaurant management app with live food status tracking, Mixpanel analytics integration, notifications, and payment processing.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Analytics</span>
+                    <span class="tag">Payments</span>
+                    <span class="tag">Real-time</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.m360ict.restaurant360" target="_blank" class="project-link">View on Play Store</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-name">Smart CashBook</div>
+                    <div class="company">Independent Project</div>
+                </div>
+                <p class="project-description">
+                    Offline-first finance management application with comprehensive finance modules for tracking and reporting.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Offline-first</span>
+                    <span class="tag">Finance</span>
+                    <span class="tag">SQLite</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.digital360.cashbook" target="_blank" class="project-link">View on Play Store</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">Software Engineer</div>
+                    <div class="timeline-meta">Dinnova AG Ltd., Zurich, Switzerland • Sep 2023 – Present</div>
+                    <div class="timeline-description">
+                        Leading Flutter development for multiple high-impact applications including DeepGrow, LetsPlan, SkillMatch, Shine, and ShopySwiss. Implementing advanced features like AI integration, real-time communication, and BLE technology.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Software Engineer</div>
+                    <div class="timeline-meta">M360ICT Ltd., Dhaka • May 2023 – Aug 2023</div>
+                    <div class="timeline-description">
+                        Developed Restaurant 360 with live food status tracking, Mixpanel analytics, and payment integration.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Software Engineer</div>
+                    <div class="timeline-meta">RideAlike Inc., Toronto, Canada • Jan 2022 – Aug 2023</div>
+                    <div class="timeline-description">
+                        Built core features for carsharing platform including exchange, chat, booking modules, and activity tracking systems.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Mobile App Developer</div>
+                    <div class="timeline-meta">Smart CashBook • 2022</div>
+                    <div class="timeline-description">
+                        Developed offline-first architecture and comprehensive finance modules.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Junior Software Developer</div>
+                    <div class="timeline-meta">TechnoFelia IT • Jan 2021 – Dec 2021</div>
+                    <div class="timeline-description">
+                        Built immersive UI and production-ready applications.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">B.Sc. in Computer Science & Engineering</div>
+                    <div class="timeline-meta">Uttara University • CGPA: 3.17/4.0</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Akter Hossain. Available for opportunities.</p>
+        </footer>
+    </div>
+
+    <div class="scroll-indicator" id="scrollTop">↑</div>
+
     <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("flutter-first-frame", function () {
-          navigator.serviceWorker.register("flutter_service_worker.js");
-          document.getElementsByClassName("loading")[0].style.display = "none";
+        // Scroll to top functionality
+        const scrollIndicator = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollIndicator.classList.add('visible');
+            } else {
+                scrollIndicator.classList.remove('visible');
+            }
         });
-      }
+
+        scrollIndicator.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
-    <script src="main.dart.js" type="application/javascript"></script>
-  </body>
+</body>
 </html>
